@@ -23,8 +23,24 @@ spec:
         app.kubernetes.io/instance: component-example
     spec:
       containers:
-      - image: docker.io/openshift/hello-openshift
+      - env:
+        - name: test
+          value: value
+        image: docker.io/openshift/hello-openshift
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
         name: container-image
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8080
         resources: {}
 status: {}

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: component-example
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: sample-component-name
+    app.kubernetes.io/part-of: my-application
+  name: component-example
+  namespace: default
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/instance: component-example
+status:
+  loadBalancer: {}
